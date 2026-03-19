@@ -1480,6 +1480,18 @@ button { cursor: pointer; }
       <p class="admin-header-title">Espace Artiste</p>
       <p class="admin-header-sub">Bonjour Rosamée — que souhaitez-vous modifier ?</p>
     </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="password" id="admin-token-input"
+          placeholder="Token GitHub"
+          style="font-family:var(--serif);font-size:12px;padding:8px 12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:var(--blanc);width:220px;"
+          value="" />
+        <button onclick="saveToken()" style="font-family:var(--serif);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;background:var(--ocre);border:none;color:var(--blanc);cursor:pointer;">
+          Enregistrer
+        </button>
+      </div>
+      <p id="token-status" style="font-family:var(--serif);font-style:italic;font-size:11px;color:rgba(255,255,255,.5);"></p>
+    </div>
     <button class="btn-solid" style="margin-top:0;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);" onclick="showPage('accueil')">← Retour au site</button>
   </div>
 
@@ -1946,9 +1958,35 @@ function scrollToApropos(section) {
 }
 
 /* ----------------------------------------------------------------
+   ADMIN — TOKEN
+---------------------------------------------------------------- */
+function saveToken() {
+  const token = document.getElementById('admin-token-input').value.trim();
+  if (!token) { 
+    document.getElementById('token-status').textContent = '✗ Token vide';
+    return; 
+  }
+  localStorage.setItem('lmr_token', token);
+  document.getElementById('token-status').textContent = '✓ Token enregistré !';
+  document.getElementById('admin-token-input').value = '';
+  setTimeout(() => {
+    document.getElementById('token-status').textContent = '';
+  }, 3000);
+}
+
+// Au chargement, vérifier si un token est déjà enregistré
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('lmr_token');
+  const status = document.getElementById('token-status');
+  if (status) {
+    status.textContent = saved ? '✓ Token déjà enregistré' : '⚠ Token non configuré';
+  }
+});
+
+/* ----------------------------------------------------------------
    ADMIN — CONFIG
 ---------------------------------------------------------------- */
-const GITHUB_TOKEN  = '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';
+const GITHUB_TOKEN  = localStorage.getItem('lmr_token') || '';
 const GITHUB_REPO   = 'Hyppolene-LaMaisonRoz/lamaisonroz';
 const GITHUB_BRANCH = 'main';
 const ADMIN_USER    = 'Hyppolène!La!Maison!Roz!';

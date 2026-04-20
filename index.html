@@ -149,7 +149,9 @@ button { cursor: pointer; }
 .nav-links a:hover::after { width: 100%; }
 #navbar.scrolled .nav-links a,
 #navbar.solid    .nav-links a { color: var(--bleu); }
-.nav-links a:hover { color: var(--bordeaux) !important; }
+.nav-links a:hover { color: var(--blanc); font-weight: 700; }
+#navbar.scrolled .nav-links a:hover,
+#navbar.solid    .nav-links a:hover { color: var(--bordeaux); font-weight: 500; }
 
 .nav-connexion {
   font-family: var(--serif); font-weight: 500; font-size: 12px;
@@ -329,6 +331,8 @@ button { cursor: pointer; }
 }
 @media (max-width: 768px) {
   .hero-content { width:100% !important; margin-left:0 !important; padding:0 24px; display:flex; flex-direction:column; align-items:center; }
+  .hero-sub-item { display:block; }
+  .hero-sub-sep  { display:none; }
 }
 @keyframes heroIn {
   from{opacity:0;transform:translateY(36px)}
@@ -337,7 +341,8 @@ button { cursor: pointer; }
 .hero-heart  { display:block;font-family:var(--brush);font-size:36px;color:var(--bordeaux);line-height:1;margin-bottom:2px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.3)); }
 .hero-maison { display:block;font-family:var(--serif);font-weight:600;font-size:clamp(16px,2.2vw,26px);letter-spacing:.45em;text-transform:uppercase;color:var(--blanc);margin-bottom:4px; }
 .hero-roz    { display:block;font-family:var(--brush);font-size:clamp(80px,12vw,140px);color:var(--bordeaux);line-height:.85;filter:drop-shadow(0 4px 20px rgba(0,0,0,.28)); }
-.hero-sub    { margin-top:28px;font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,22px);letter-spacing:.07em;color:rgba(255,255,255,.88);text-align:center;width:100%; text-shadow: 0 0 10px black; }
+.hero-sub    { margin-top:20px;font-family:var(--serif);font-size:17px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);text-align:center;width:100%;text-shadow:0 0 12px rgba(0,0,0,.9); }
+.hero-presentation { margin-top:28px;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.9;color:rgba(255,255,255,.92);text-align:center;max-width:700px;width:100%;text-shadow:0 2px 4px rgba(0,0,0,.9), 0 4px 16px rgba(0,0,0,.8), 0 8px 32px rgba(0,0,0,.6); }
 .hero-scroll {
   position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -352,8 +357,11 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 #portfolio { padding:80px 0 88px; background:var(--blanc); margin-top:40px; }
 #portfolio > * { max-width:1300px; margin-left:auto; margin-right:auto; padding:0 52px; }
 .portfolio-header {
-  display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;
+  margin-bottom:64px;
   max-width:1200px;margin-left:auto;margin-right:auto;
+}
+.portfolio-header-top {
+  display:flex;justify-content:space-between;align-items:flex-end;
 }
 .portfolio-voir {
   font-family:var(--serif);font-size:14px;color:var(--bleu);
@@ -670,17 +678,39 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   font-family:var(--serif);font-size:18px;line-height:1.85;
   color:#4a4a4a;margin-top:24px;
 }
-/* Deux colonnes */
+/* Sous-nav prestations (mobile uniquement) */
+.prestations-subnav{
+  display:none;
+}
+@media (max-width:768px){
+  .prestations-subnav{
+    display:flex;justify-content:center;flex-wrap:wrap;
+    border-bottom:2px solid #e8e4de;
+    background:var(--blanc);
+    position:sticky;top:70px;z-index:100;
+  }
+}
+.prestations-subnav-btn{
+  font-family:var(--serif);font-weight:500;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 16px;background:transparent;border:none;
+  color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;
+  transition:all .3s;cursor:pointer;
+}
+.prestations-subnav-btn:hover{color:var(--bordeaux);}
+.prestations-subnav-btn.active{color:var(--bordeaux);border-bottom-color:var(--bordeaux);}
+
+/* Trois colonnes */
 .ateliers-cols{
-  display:grid;grid-template-columns:1fr 1fr;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
   gap:0;
 }
 .ateliers-col{
-  padding:80px 60px;
+  padding:80px 44px;
   display:flex;flex-direction:column;gap:24px;
 }
-.ateliers-col:first-child{background:var(--blanc);}
-.ateliers-col:last-child{background:var(--clair);}
+.ateliers-col:nth-child(odd){background:var(--blanc);}
+.ateliers-col:nth-child(even){background:var(--clair);}
 @media (max-width: 768px) {
   .ateliers-hero { padding: 100px 24px 40px; }
   .ateliers-intro { font-size: 16px; text-align: justify; }
@@ -1083,7 +1113,7 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   <ul class="nav-links" id="nav-links">
     <li id="nav-accueil-btn" style="display:none;"><a href="#" onclick="showPage('accueil');closeMobileMenu();return false;">Accueil</a></li>
     <li><a href="#" onclick="showPage('galerie');closeMobileMenu();return false;">Galerie</a></li>
-    <li><a href="#" onclick="showPage('ateliers');closeMobileMenu();return false;">Ateliers</a></li>
+    <li><a href="#" onclick="showPage('ateliers');closeMobileMenu();return false;">Prestations</a></li>
     <li><a href="#" onclick="showPage('apropos');closeMobileMenu();return false;">À propos</a></li>
     <li><a href="#" onclick="showPage('contact');closeMobileMenu();return false;">Contact</a></li>
   </ul>
@@ -1101,7 +1131,8 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <svg viewBox="0 0 1131.43 800" xmlns="http://www.w3.org/2000/svg" style="height:220px;width:auto;margin-bottom:20px;filter:drop-shadow(0 4px 20px rgba(0,0,0,.3));"><defs><style>.lmr-a{fill:#ffffff}.lmr-b{fill:#ffffff}</style></defs><path class="lmr-b" d="M551.87,251.8c-4.83,0-8.04-2.07-12.18-6.43-2.3-2.53-1.84-4.82.69-6.66,3.21-2.07,6.2-4.13,9.64-5.74,13.55-6.66,53.28-35.83,53.28-52.82,0-1.61-.46-3.22-1.15-4.59-12.63-.23-25.72,25.72-28.02,30.32-1.84,3.44-3.45,5.97-5.51,5.97-.69,0-1.38-.23-2.07-.69-3.22.92-6.2,1.38-9.42,1.38-6.89,0-9.19-5.05-9.19-11.94,0-4.36,1.61-9.19,2.3-13.55.69-4.59,1.38-9.42,1.38-14.47,0-6.43-1.15-12.86-4.36-17.92-6.43,7.12-8.96,17.46-8.96,28.25,0,15.39,5.05,31.23,11.02,40.65,1.38,2.53,1.61,4.82-.69,6.2-3.67,2.3-9.41,3.45-13.55,4.82-2.76.92-4.59.46-5.74-2.3-7.58-16.54-10.8-31.69-10.8-44.78,0-30.32,15.85-50.99,25.95-50.99,20.67-.23,24.57,17,28.25,30.78,7.58-5.51,16.77-9.41,25.27-9.41,6.89,0,14.7,3.44,18.14,10.33,3.45,6.66,3.21,11.25,3.21,15.85,0,6.89-2.07,12.17-4.36,18.6-9.88,22.51-36.06,42.49-48.46,48.69-3.67,1.38-5.97,2.07-8.04,2.07-2.3,0-4.13-.69-6.66-1.61Z"/><g><path class="lmr-b" d="M361.1,640.81c-5.45-8.71-7.62-19.6-7.62-31.95,0-37.03,15.61-84.59,23.24-108.19l-8.71-6.54c-3.99-2.9-2.9-7.62,1.45-10.53,13.07-8.71,17.43-11.98,21.05-14.52,1.45-7.99,2.9-14.52,6.54-26.87,1.45-5.08,5.45-6.53,9.8-3.63,6.53,4.36,13.43,8.35,17.43,11.98,30.86-12.34,47.56-14.16,68.25-14.16,11.62,0,33.04,5.08,37.03,21.42,6.54,1.45,9.08,8.71,9.08,17.43,0,32.68-45.02,84.95-98.03,101.65,31.95,28.32,70.07,31.58,76.6,26.5,5.08-4.36,7.99,13.43-10.17,22.87-18.15,9.44-53.37,6.54-107.83-36.67-1.45,10.53-3.27,24.69-3.27,35.22,0,8.71,1.09,15.25,4.36,15.25,1.45,0,2.9-1.09,3.99-2.54,2.54-3.63,3.26.73,3.26,2.18,0,14.16-9.07,22.87-22.51,22.87-11.98,0-21.06-10.16-23.96-21.78ZM505.6,480.34c0-9.08-21.06-7.99-30.13-6.17-11.98,2.18-34.13,7.99-45.74,14.52-6.17,16.34-13.07,37.4-19.24,55.91,40.3-5.45,95.12-35.22,95.12-64.26Z"/><path class="lmr-b" d="M530.88,567.46c-2.18-34.49,21.42-69.34,45.74-85.32,2.18-1.45,7.99-1.81,10.17.36,18.51,15.25,46.47,22.87,45.74,49.74-1.09,35.94-35.58,73.7-61.36,73.7-20.69,0-39.21-18.15-40.3-38.48ZM585.34,576.54c20.33-33.4,17.43-57.73,17.07-62.08-15.61,10.89-27.6,27.23-33.04,52.64-2.18,10.89,0,20.69,2.9,20.69,4.72,0,9.08-4.72,13.07-11.25Z"/><path class="lmr-b" d="M622.73,645.47c-7.26-5.08-10.16-11.98-10.16-19.24,0-20.33,24.68-45.38,35.57-56.27,40.3-40.66,63.9-62.08,99.84-102.74-51.55,4.36-88.95,29.04-96.94,29.04-6.17,0-18.15-7.63-24.32-14.16-6.54-7.26-10.89-14.89-10.89-19.61,0-3.63,2.17-5.08,10.89-3.99,26.14-13.43,61.72-26.87,93.67-26.87,16.7,0,32.67,2.54,45.02,12.71,7.62,6.17,13.43,27.59,11.62,38.12-7.26,40.66-91.13,106.74-110.37,130.34,14.89-2.18,38.85-9.44,63.53-9.44,11.62,0,29.77,7.26,29.77,20.69,0,3.99-3.27,13.8-6.9,10.53-3.99-3.63-5.45-5.81-9.44-5.81-1.45,0-4.36,0-13.07,2.9-27.23,9.08-54.46,15.61-88.59,23.24-1.81.36-3.27.36-4.36.36-7.99,0-11.26-4.36-14.89-9.8Z"/></g><g><path class="lmr-a" d="M197.33,355.52c-.71,3.8-3.18,13.16-3.97,15.55h-43.81v-3.27c7.77-.53,8.48-1.15,8.48-8.57v-33.65c0-7.42-.88-8.13-7.51-8.66v-3.27h27.56v3.27c-6.89.62-7.77,1.24-7.77,8.66v34.27c0,4.86.18,7.07,5.04,7.15.18.09,4.24.09,4.59.09,5.04,0,6.36-1.06,8.48-3.45,1.68-1.77,3.97-5.56,5.56-9.19l3.36,1.06Z"/><path class="lmr-a" d="M279.01,371.06v-3.27c5.57-.8,5.57-1.77,4.33-5.57-.88-2.65-2.3-6.62-3.62-10.16h-17.22c-.97,2.74-2.21,6.09-3.09,8.83-1.85,5.56.27,6.27,7.24,6.89v3.27h-21.82v-3.27c5.57-.71,6.98-1.5,9.98-8.92l18.37-45.67,4.24-.8c5.65,15.37,11.66,31.09,17.4,45.84,3.27,8.21,4.06,8.83,9.8,9.54v3.27h-25.62ZM271.24,328.84c-2.56,6.36-5.03,12.28-7.24,18.73h14.04l-6.8-18.73Z"/><path class="lmr-a" d="M459.71,371.06v-3.27c6.71-.71,7.15-1.33,7.15-9.27l-.09-34.45c-6.36,15.19-13.34,31.98-19.7,46.99h-2.91c-5.74-14.4-12.01-30.83-18.37-46.28-1.15,27.74-1.15,33.21-1.15,36.39.09,4.77,1.85,6.01,8.48,6.62v3.27h-21.91v-3.27c5.04-.44,7.33-1.41,8.04-6.71.35-2.65.71-7.68,2.74-36.83.26-4.24-.35-6.62-7.95-7.33v-3.27h19.08l17.05,38.95,17.14-38.95h18.64v3.27c-7.07.71-7.86,1.41-7.68,8.48l.71,33.12c.09,7.95.44,8.3,7.6,9.27v3.27h-26.85Z"/><path class="lmr-a" d="M567.28,371.06v-3.27c5.56-.8,5.56-1.77,4.33-5.57-.88-2.65-2.3-6.62-3.62-10.16h-17.22c-.97,2.74-2.21,6.09-3.09,8.83-1.85,5.56.27,6.27,7.24,6.89v3.27h-21.82v-3.27c5.57-.71,6.98-1.5,9.98-8.92l18.37-45.67,4.24-.8c5.65,15.37,11.66,31.09,17.4,45.84,3.27,8.21,4.06,8.83,9.81,9.54v3.27h-25.62ZM559.5,328.84c-2.56,6.36-5.04,12.28-7.24,18.73h14.04l-6.8-18.73Z"/><path class="lmr-a" d="M640.22,371.06v-3.27c6.71-.62,7.51-1.15,7.51-8.57v-33.65c0-7.42-.88-8.13-7.51-8.66v-3.27h27.29v3.27c-6.62.62-7.51,1.24-7.51,8.66v33.65c0,7.33.79,7.86,7.51,8.57v3.27h-27.29Z"/><path class="lmr-a" d="M751.77,328.22c-1.77-5.65-4.24-12.1-12.36-12.1-5.12,0-8.48,3.62-8.48,8.57s3.27,7.77,11.04,11.66c9.45,4.68,15.46,9.27,15.46,18.02,0,10.42-8.66,18.02-21.29,18.02-5.65,0-10.69-1.5-14.84-2.74-.53-2.03-2.03-11.22-2.65-15.37l3.44-.79c1.77,5.56,6.71,15.19,15.37,15.19,5.39,0,8.66-3.36,8.66-9.01,0-5.12-3.18-8.13-10.6-12.1-9.19-4.95-15.19-9.36-15.19-18.55s7.24-16.61,20.49-16.61c6.09,0,10.69,1.32,12.63,1.59.35,3.27.97,7.86,1.68,13.43l-3.36.8Z"/><path class="lmr-a" d="M839.64,312.41c16.34,0,29.68,11.92,29.68,29.33,0,18.81-13.43,30.65-30.12,30.65-17.66,0-30.47-12.9-30.47-29.94,0-15.1,10.78-30.03,30.92-30.03ZM838.32,316.3c-9.01,0-15.63,8.83-15.63,24.47s5.92,27.74,17.84,27.74c8.39,0,14.93-8.13,14.93-24.29,0-17.49-6.89-27.91-17.14-27.91Z"/><path class="lmr-a" d="M982.72,316.92c-5.39.71-7.07,1.85-7.33,5.83-.26,3.45-.53,6.45-.53,14.13v35.16h-4.95l-36.83-44.17v19.96c0,7.68.18,11.13.44,13.69.35,3.89,2.21,5.92,8.75,6.27v3.27h-21.91v-3.27c5.04-.44,7.24-1.77,7.77-5.92.35-3.18.53-6.36.53-14.04v-20.93c0-2.91-.18-4.86-1.86-7.15-1.59-2.21-3.71-2.47-7.42-2.83v-3.27h17.23l33.65,39.13v-15.9c0-7.68-.09-10.6-.35-13.87-.26-3.8-1.68-5.65-9.01-6.09v-3.27h21.82v3.27Z"/></g></svg>
-      <p class="hero-sub">Fresques artistiques, fresques participatives et ateliers d'arts plastiques</p>
+      <p class="hero-sub"><span class="hero-sub-item">Fresques artistiques</span><span class="hero-sub-sep"> &nbsp;·&nbsp; </span><span class="hero-sub-item">Fresques participatives</span><span class="hero-sub-sep"> &nbsp;·&nbsp; </span><span class="hero-sub-item">Ateliers d'arts plastiques</span></p>
+      <p class="hero-presentation">La Maison Roz est un projet artistique mené par Rosamée de Mauroy depuis 2008, qui propose des décorations murales poétiques, humoristiques et colorées. Créées sur mesure pour améliorer l'accueil, le confort esthétique et le bien-être, les fresques permettent de singulariser un lieu au plus proche de sa raison d'être, et pour des professionnels de transmettre valeurs et intentions auprès des publics qu'ils accueillent.</p>
     </div>
 
   </section>
@@ -1111,36 +1142,38 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   <!-- PORTFOLIO -->
   <section id="portfolio" class="reveal">
     <div class="portfolio-header">
-      <div>
-        <span class="section-label">Fresques</span>
-        <h2 class="section-brush">Nos réalisations</h2>
-        <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:18px;max-width:680px;">Des espaces de soin, d'accueil et d'éducation aux intérieurs privés, chaque projet naît d'une écoute et se construit à la mesure du lieu et de ceux qui l'habitent. Ici, couleur, humour et poésie enchantent les murs blancs.</p>
+      <div class="portfolio-header-top">
+        <div>
+          <span class="section-label">Fresques</span>
+          <h2 class="section-brush">Nos réalisations</h2>
+        </div>
+        <span class="portfolio-voir" onclick="showPage('galerie')">Voir toute la galerie &nbsp;→</span>
       </div>
-      <span class="portfolio-voir" onclick="showPage('galerie')">Voir toute la galerie &nbsp;→</span>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:18px;max-width:680px;">Des espaces de soin, d'accueil et d'éducation aux intérieurs privés, chaque projet naît d'une écoute et se construit à la mesure du lieu et de ceux qui l'habitent. Ici, couleur, humour et poésie enchantent les murs blancs.</p>
     </div>
     <div class="portfolio-grid">
-      <div class="portfolio-item" onclick="showPage('galerie')">
+      <div class="portfolio-item" onclick="showPage('galerie');filtrerGalerie('sante')">
         <div class="portfolio-photo"><img src="https://res.cloudinary.com/dutonwdor/image/upload/portfolio-sante.jpg" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
         <div class="portfolio-info">
           <p class="portfolio-info-title">Santé</p>
           <p class="portfolio-info-sub">Accompagner le parcours de soin avec humour.</p>
         </div>
       </div>
-      <div class="portfolio-item" onclick="showPage('galerie')">
+      <div class="portfolio-item" onclick="showPage('galerie');filtrerGalerie('petite-enfance')">
         <div class="portfolio-photo"><img src="https://res.cloudinary.com/dutonwdor/image/upload/portfolio-petite-enfance.jpg" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
         <div class="portfolio-info">
           <p class="portfolio-info-title">Petite enfance</p>
           <p class="portfolio-info-sub">Crèches, école, espaces de jeux.</p>
         </div>
       </div>
-      <div class="portfolio-item" onclick="showPage('galerie')">
+      <div class="portfolio-item" onclick="showPage('galerie');filtrerGalerie('tout-public')">
         <div class="portfolio-photo"><img src="https://res.cloudinary.com/dutonwdor/image/upload/portfolio-tout-public.jpg" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
         <div class="portfolio-info">
           <p class="portfolio-info-title">Tout public</p>
           <p class="portfolio-info-sub">Motifs abstraits, végétaux, fenêtres vers l'extérieur… pour que chacun s'y retrouve.</p>
         </div>
       </div>
-      <div class="portfolio-item" onclick="showPage('galerie')">
+      <div class="portfolio-item" onclick="showPage('galerie');filtrerGalerie('jeunesse')">
         <div class="portfolio-photo"><img src="https://res.cloudinary.com/dutonwdor/image/upload/portfolio-jeunesse.jpg" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
         <div class="portfolio-info">
           <p class="portfolio-info-title">Jeunesse</p>
@@ -1177,9 +1210,9 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
     </div>
     <div class="section-text">
       <span class="section-label">Créer ensemble</span>
-      <h2 class="section-brush">Les Ateliers</h2>
+      <h2 class="section-brush">Les ateliers</h2>
       <p>La Maison Roz propose également des ateliers artistiques.<br><br>L'approche et les propositions sont accessibles à tout type de public et s'adaptent aux spécificités des âges et des groupes accompagnés. À travers différents médiums, Rosamée propose de partir à la découverte de ses habitudes et de ses idées reçues. Elle invite à créer individuellement et/ou en groupe, à essayer d'exprimer idées, sensations et émotions par le geste, la couleur, la matière.<br><br>Des fresques collaboratives aux ateliers d'arts plastiques, chaque session est une invitation à créer du lien, de la couleur et du sens — à plonger, avec ou sans mots, dans la joie de créer ensemble.</p>
-      <span class="btn-solid" onclick="showPage('ateliers')" style="cursor:pointer;">Découvrir les ateliers</span>
+      <span class="btn-solid" onclick="showPage('ateliers')" style="cursor:pointer;">Découvrir les prestations</span>
     </div>
   </section>
 
@@ -1477,34 +1510,35 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 
   <div class="ateliers-hero">
     <span class="section-label">Créer ensemble</span>
-    <h1 class="section-brush">Les Ateliers</h1>
+    <h1 class="section-brush">Prestations</h1>
     <p class="ateliers-intro">Des ateliers pour progresser individuellement, puis partager idées, techniques, talents,<br>et avancer ensemble sur des projets collectifs ou personnels.</p>
   </div>
 
+  <div class="prestations-subnav">
+    <button class="prestations-subnav-btn active" data-presta="fresques" onclick="scrollToPrestation('fresques')">Fresques</button>
+    <button class="prestations-subnav-btn" data-presta="ateliers-ap" onclick="scrollToPrestation('ateliers-ap')">Ateliers d'art plastique</button>
+    <button class="prestations-subnav-btn" data-presta="fresques-participatives" onclick="scrollToPrestation('fresques-participatives')">Fresques participatives</button>
+  </div>
+
   <div class="ateliers-cols">
-    <!-- Colonne 1 : Fresques participatives -->
-    <div class="ateliers-col">
+    <!-- Colonne 1 : Fresques -->
+    <div class="ateliers-col" id="presta-fresques">
       <div class="ateliers-col-photo">
-        <img src="https://res.cloudinary.com/dutonwdor/image/upload/section-atelier-fresque.jpg" style="width:100%;height:100%;min-height:280px;object-fit:cover;" loading="lazy" />
+        <img src="https://res.cloudinary.com/dutonwdor/image/upload/accueil-ateliers.jpg" style="width:100%;height:100%;min-height:280px;object-fit:cover;" loading="lazy" />
       </div>
-      <span class="ateliers-col-tag tag-bordeaux">Fresques participatives</span>
-      <h3>Peindre en grand</h3>
-      <p>Avec un objectif de fresque artistique collective, chaque participant contribue à la création d'un ensemble cohérent. Idéal pour les groupes de 5 à 25 personnes.</p>
-      <p>Avec un tel projet, on cherche à faire émerger : la confiance en soi, l'acceptation de soi, l'écoute, le partage des talents, des sensibilités, de la démarche créative, un résultat commun et cohérent.<br>La création est guidée, jamais dirigée.<br>Le cadre peut varier en fonction des objectifs et des intentions du projet.</p>
+      <span class="ateliers-col-tag tag-bordeaux">Fresques</span>
+      <h3>Peindre les murs.</h3>
+      <p>Des espaces de soin, d'accueil et d'éducation aux intérieurs privés, chaque projet naît d'une écoute et se construit à la mesure du lieu et de ceux qui l'habitent. Ici, couleur, humour et poésie enchantent les murs blancs.</p>
       <ul>
-        <li>Accompagnement de A à Z : conception, esquisses, réalisation</li>
-        <li>Adapté à tous niveaux artistiques</li>
-        <li>Trois formules possibles : fresque éphémère, fresque mobile, fresque murale</li>
-        <li>Durée : 5 à 20 ateliers environ selon la taille du projet et la formule</li>
-        <li>De 5 à 25 participants</li>
-        <li>Matériel fourni en partie</li>
+        <li>Conception et réalisation de A à Z</li>
+        <li>Espaces de soin, établissements scolaires, crèches, espaces publics, intérieurs privés</li>
         <li>Frais de déplacement au-delà de 30 km depuis Die (Drôme)</li>
-        <li>Tarif : à partir de 1 050 € pour une fresque éphémère (5 ateliers de 2h répartis sur 5 semaines) — plus de renseignements sur demande</li>
+        <li>Tarif : sur devis selon la surface et le lieu</li>
       </ul>
-      <button class="btn-solid" onclick="showPage('contact')" style="margin-top:28px;">Venez nous parler de votre projet !</button>
+      <button class="btn-solid" onclick="showPage('galerie')" style="margin-top:28px;">Voir la galerie</button>
     </div>
     <!-- Colonne 2 : Ateliers art plastique -->
-    <div class="ateliers-col">
+    <div class="ateliers-col" id="presta-ateliers-ap">
       <div class="ateliers-col-photo">
         <img src="https://res.cloudinary.com/dutonwdor/image/upload/section-atelier-arts-plastiques.jpg" style="width:100%;height:100%;min-height:280px;object-fit:cover;" loading="lazy" />
       </div>
@@ -1527,6 +1561,27 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
       </ul>
       <button class="btn-outline" onclick="showPage('contact')" style="margin-top:28px;">Réserver un atelier</button>
     </div>
+    <!-- Colonne 3 : Fresques participatives -->
+    <div class="ateliers-col" id="presta-fresques-participatives">
+      <div class="ateliers-col-photo">
+        <img src="https://res.cloudinary.com/dutonwdor/image/upload/section-atelier-fresque.jpg" style="width:100%;height:100%;min-height:280px;object-fit:cover;" loading="lazy" />
+      </div>
+      <span class="ateliers-col-tag tag-bordeaux">Fresques participatives</span>
+      <h3>Peindre en grand.</h3>
+      <p>Avec un objectif de fresque artistique collective, chaque participant contribue à la création d'un ensemble cohérent. Idéal pour les groupes de 5 à 25 personnes.</p>
+      <p>Avec un tel projet, on cherche à faire émerger : la confiance en soi, l'acceptation de soi, l'écoute, le partage des talents, des sensibilités, de la démarche créative, un résultat commun et cohérent.<br>La création est guidée, jamais dirigée.<br>Le cadre peut varier en fonction des objectifs et des intentions du projet.</p>
+      <ul>
+        <li>Accompagnement de A à Z : conception, esquisses, réalisation</li>
+        <li>Adapté à tous niveaux artistiques</li>
+        <li>Trois formules possibles : fresque éphémère, fresque mobile, fresque murale</li>
+        <li>Durée : 5 à 20 ateliers environ selon la taille du projet et la formule</li>
+        <li>De 5 à 25 participants</li>
+        <li>Matériel fourni en partie</li>
+        <li>Frais de déplacement au-delà de 30 km depuis Die (Drôme)</li>
+        <li>Tarif : à partir de 1 050 € pour une fresque éphémère (5 ateliers de 2h répartis sur 5 semaines) — plus de renseignements sur demande</li>
+      </ul>
+      <button class="btn-solid" onclick="showPage('contact')" style="margin-top:28px;">Venez nous parler de votre projet !</button>
+    </div>
   </div>
 
   <!-- Témoignages ateliers -->
@@ -1539,11 +1594,36 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
       <div class="temo-track">
         <div class="temo-slides" id="temo-slides-ateliers">
           <div class="temo-slide">
-
             <div>
               <p class="temo-quote">« Formidable travail avec Rosamée ! Partir d'un travail de recherche individuel... pour aller vers une œuvre collective. De façon sensible et subtile, elle accompagne les enfants dans un processus profond de création où chacun.e verra une part de soi dans cette fresque. Une démarche en complète cohérence avec notre projet éducatif basé sur la coopération ! Les "Je" reconnus et accueillis, au service d'un "Nous" fertile et stimulant. »</p>
               <p class="temo-author">Edwige Picard</p>
               <p class="temo-role">École Buissonnière, Die</p>
+            </div>
+          </div>
+          <div class="temo-slide">
+            <div>
+              <p class="temo-quote">« Je trouve vos dessins à la fois très "drôles" et très gais. Vous faites vivre le service et créez une véritable ambiance pour les parents, les frères et sœurs, le personnel et bien sûr les bébés. »</p>
+              <p class="temo-author">Aurélie Pion</p>
+              <p class="temo-role">Réa-néonat de Chambéry · 21 juin 2019</p>
+            </div>
+          </div>
+          <div class="temo-slide">
+            <div>
+              <p class="temo-quote">« Merci, merci pour votre merveilleuse décoration du bloc opératoire d'Annecy. C'est tellement réconfortant de se perdre dans les feuillages et les fleurs, et j'en avais vraiment besoin. »</p>
+              <p class="temo-author">Georgette Sonney</p>
+              <p class="temo-role">Bloc opératoire d'Annecy · 14 avril 2023</p>
+            </div>
+          </div>
+          <div class="temo-slide">
+            <div>
+              <p class="temo-quote">« Instant de vie, instant de complicité, instant de bonheur… tes coups de crayons me rappellent à beaucoup de mes propres petits bonheurs… merci. »</p>
+              <p class="temo-author">Adeline</p>
+            </div>
+          </div>
+          <div class="temo-slide">
+            <div>
+              <p class="temo-quote">« Merci pour vos superbes peintures dans les couloirs du service nourrisson de l'hôpital : mon fils de 1 an y a séjourné un peu plus d'une semaine (tout est rentré dans l'ordre depuis, ouf !) et vos peintures ont agrémenté nos promenades dans les couloirs pour passer le temps, pour lui comme pour moi qui me suis amusée avec tous les petits détails. J'ai donc noté votre adresse pour vous féliciter et vous remercier ! »</p>
+              <p class="temo-author">Corine</p>
             </div>
           </div>
         </div>

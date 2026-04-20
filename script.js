@@ -271,6 +271,17 @@ document.addEventListener('keydown', e => {
 });
 
 /* ----------------------------------------------------------------
+   PRESTATIONS — SOUS-NAV SCROLL (mobile)
+---------------------------------------------------------------- */
+function scrollToPrestation(section) {
+  const el = document.getElementById('presta-' + section);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.prestations-subnav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.presta === section);
+  });
+}
+
+/* ----------------------------------------------------------------
    À PROPOS — SOUS-NAV SCROLL
 ---------------------------------------------------------------- */
 function scrollToApropos(section) {

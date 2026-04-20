@@ -819,3 +819,34 @@ function initReveal() {
   });
 }
 initReveal();
+
+/* ----------------------------------------------------------------
+   HERO SOUS-TITRE — masquer les points si les GN se superposent
+---------------------------------------------------------------- */
+function updateHeroSeps() {
+  const items = document.querySelectorAll('.hero-sub-item');
+  const seps  = document.querySelectorAll('.hero-sub-sep');
+  if (items.length < 2) return;
+  // Remettre en inline pour mesurer l'état naturel
+  items.forEach(item => { item.style.display = 'inline'; item.style.marginBottom = ''; });
+  seps.forEach(sep => sep.style.display = 'inline');
+  // Forcer reflow
+  void items[0].getBoundingClientRect();
+  const tops = Array.from(items).map(el => Math.round(el.getBoundingClientRect().top));
+  const allOneLine = tops.every(t => t === tops[0]);
+  if (allOneLine) {
+    // Tous sur une ligne : afficher les points, laisser inline
+    items.forEach(item => item.style.display = '');
+    seps.forEach(sep => sep.style.display = '');
+  } else {
+    // Wrapping : forcer chaque GN sur sa propre ligne, cacher les points
+    items.forEach(item => { item.style.display = 'block'; item.style.marginBottom = '6px'; });
+    seps.forEach(sep => sep.style.display = 'none');
+  }
+}
+window.addEventListener('resize', updateHeroSeps);
+window.addEventListener('load', function() {
+  updateHeroSeps();
+  setTimeout(updateHeroSeps, 300);
+});
+if (document.fonts) document.fonts.ready.then(updateHeroSeps);

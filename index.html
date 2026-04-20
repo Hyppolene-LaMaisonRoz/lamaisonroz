@@ -342,7 +342,7 @@ button { cursor: pointer; }
 .hero-maison { display:block;font-family:var(--serif);font-weight:600;font-size:clamp(16px,2.2vw,26px);letter-spacing:.45em;text-transform:uppercase;color:var(--blanc);margin-bottom:4px; }
 .hero-roz    { display:block;font-family:var(--brush);font-size:clamp(80px,12vw,140px);color:var(--bordeaux);line-height:.85;filter:drop-shadow(0 4px 20px rgba(0,0,0,.28)); }
 .hero-sub    { margin-top:20px;font-family:var(--serif);font-size:17px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);text-align:center;width:100%;text-shadow:0 0 12px rgba(0,0,0,.9); }
-.hero-presentation { margin-top:28px;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.9;color:rgba(255,255,255,.92);text-align:center;max-width:700px;width:100%;text-shadow:0 2px 4px rgba(0,0,0,.9), 0 4px 16px rgba(0,0,0,.8), 0 8px 32px rgba(0,0,0,.6); }
+.hero-presentation { margin-top:28px;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.9;color:rgba(255,255,255,.92);text-align:center;max-width:700px;width:100%;text-shadow:0 0 12px rgba(0,0,0,.9); }
 .hero-scroll {
   position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -1338,21 +1338,21 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
         <input type="email" id="lo-email" placeholder="pour que je puisse vous répondre" />
       </div>
       <div style="text-align:center;margin-top:28px;">
-        <button class="btn-solid" onclick="submitLivreOr()" style="margin-top:0;">Publier mon message</button>
+        <button class="btn-solid" onclick="submitLivreOr()" style="margin-top:0;">Envoyer mon message</button>
       </div>
     </div>
   </section>
 
   <!-- BANDEAU NAV DÉGUISÉ -->
   <section id="nav-bande" style="grid-template-columns:1fr 1fr;">
-    <div class="nb-item" onclick="showPage('apropos')" style="aspect-ratio:16/7;background-color:var(--grisbleu);">
+    <div class="nb-item" onclick="scrollToApropos('soutenir')" style="aspect-ratio:16/7;background-color:var(--grisbleu);">
       <div class="nb-photo" style="background-image:url('https://res.cloudinary.com/dutonwdor/image/upload/v1775725271/accueil-soutenir.png');background-size:cover;background-position:center;"></div>
       <div class="nb-overlay" style="align-items:flex-end;padding-right:32px;">
         <span class="nb-title" style="text-align:right;">Comment soutenir<br>La Maison Roz</span>
         <span class="nb-arrow">→</span>
       </div>
     </div>
-    <div class="nb-item" onclick="showPage('galerie')" style="aspect-ratio:16/7;background-color:var(--grisbleu);">
+    <div class="nb-item" onclick="showPage('contact')" style="aspect-ratio:16/7;background-color:var(--grisbleu);">
       <div class="nb-photo" style="background-image:url('https://res.cloudinary.com/dutonwdor/image/upload/v1775725305/accueil-suspendu.png');background-size:cover;background-position:center;"></div>
       <div class="nb-overlay" style="align-items:flex-start;padding-left:32px;">
         <span class="nb-title" style="text-align:left;">Projets de fresques<br>suspendues</span>
@@ -1509,9 +1509,8 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 <div id="page-ateliers" class="page">
 
   <div class="ateliers-hero">
-    <span class="section-label">Créer ensemble</span>
     <h1 class="section-brush">Prestations</h1>
-    <p class="ateliers-intro">Des ateliers pour progresser individuellement, puis partager idées, techniques, talents,<br>et avancer ensemble sur des projets collectifs ou personnels.</p>
+    <p class="ateliers-intro">La Maison Roz vous propose de réaliser pour vous une ou des fresques adaptées à votre lieu, ainsi que des ateliers pour progresser individuellement, puis partager idées, techniques, talents, et avancer ensemble sur des projets collectifs ou personnels.</p>
   </div>
 
   <div class="prestations-subnav">
@@ -1527,15 +1526,21 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
         <img src="https://res.cloudinary.com/dutonwdor/image/upload/accueil-ateliers.jpg" style="width:100%;height:100%;min-height:280px;object-fit:cover;" loading="lazy" />
       </div>
       <span class="ateliers-col-tag tag-bordeaux">Fresques</span>
-      <h3>Peindre les murs.</h3>
-      <p>Des espaces de soin, d'accueil et d'éducation aux intérieurs privés, chaque projet naît d'une écoute et se construit à la mesure du lieu et de ceux qui l'habitent. Ici, couleur, humour et poésie enchantent les murs blancs.</p>
+      <h3>Décorer les murs.</h3>
+      <p>Vous souhaitez faire parler vos murs, inviter au voyage, au rêve, au rire ?</p>
+      <p>Des espaces de soin, d'accueil et d'éducation aux intérieurs privés, chaque projet naît d'une écoute et se construit à la mesure du lieu et de ceux qui l'habitent.</p>
+      <p>Que ce soit pour scénographier un espace et le rendre vivant, inviter à la détente ou à la déambulation, comme support de soin ou pour rendre une signalétique amusante et créative, chaque fresque est unique parce que chaque lieu l'est.</p>
       <ul>
-        <li>Conception et réalisation de A à Z</li>
+        <li>Conception et réalisation de A à Z, pas à pas</li>
         <li>Espaces de soin, établissements scolaires, crèches, espaces publics, intérieurs privés</li>
-        <li>Frais de déplacement au-delà de 30 km depuis Die (Drôme)</li>
-        <li>Tarif : sur devis selon la surface et le lieu</li>
+        <li>Pas de frais de déplacement</li>
+        <li>Tarif : sur devis selon la surface et le projet</li>
+        <li>Dossier de présentation pour l'obtention de financements</li>
       </ul>
-      <button class="btn-solid" onclick="showPage('galerie')" style="margin-top:28px;">Voir la galerie</button>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;">
+        <button class="btn-solid" onclick="showPage('galerie')">Voir la galerie</button>
+        <button class="btn-outline" onclick="showPage('contact')">Venez expliquer votre projet</button>
+      </div>
     </div>
     <!-- Colonne 2 : Ateliers art plastique -->
     <div class="ateliers-col" id="presta-ateliers-ap">
@@ -1683,8 +1688,8 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   <!-- L'équipe -->
   <div class="apropos-section" id="apropos-equipe">
     <div style="text-align:center;margin-bottom:60px;">
-      <span class="section-label">Les visages de la MR</span>
-      <h2 class="section-brush">L'équipe</h2>
+      <span class="section-label">La Maison Roz, c'est aussi…</span>
+      <h2 class="section-brush">Une équipe</h2>
     </div>
     <div class="equipe-grid">
       <div class="equipe-card">
@@ -2142,7 +2147,7 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   </div>
 </footer>
 <div id="footer-bottom">
-  <p>&copy; 2025 La Maison Roz &nbsp;·&nbsp; Rosamée De Mauroy</p>
+  <p>&copy; 2026 La Maison Roz &nbsp;·&nbsp; Rosamée De Mauroy</p>
   <p style="font-family:var(--serif);font-size:13px;color:rgba(255,255,255,.7);margin-top:10px;text-align:center;">⚠️ Toutes les images de ce site sont protégées par le droit d'auteur. Toute reproduction ou utilisation sans autorisation est interdite. Pour toute demande, <a href="#" onclick="showPage('contact');return false;" style="color:rgba(255,255,255,.5);text-decoration:underline;">contactez l'artiste</a>.</p>
   <div class="footer-bottom-links">
 

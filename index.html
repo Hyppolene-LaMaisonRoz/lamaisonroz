@@ -18,6 +18,83 @@
   <!-- Protection IA : interdit l'utilisation du contenu pour l'entraînement -->
   <meta name="robots" content="noai, noimageai" />
   <meta name="googlebot" content="noai, noimageai" />
+
+  <!-- Données structurées JSON-LD (SEO local, Knowledge Panel Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "La Maison Roz",
+    "alternateName": "Rosamée de Mauroy",
+    "description": "Fresques murales artistiques, fresques participatives et ateliers d'arts plastiques. Décoration murale sur mesure pour espaces de soin, crèches, écoles et particuliers.",
+    "url": "https://www.lamaisonroz.fr",
+    "image": "https://res.cloudinary.com/dutonwdor/image/upload/f_auto,q_auto/01-PHOTO_hero-page-accueil.jpg",
+    "logo": "https://www.lamaisonroz.fr/favicon-96x96.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Rosamée de Mauroy",
+      "jobTitle": "Artiste peintre",
+      "url": "https://rosameedemauroy.fr"
+    },
+    "foundingDate": "2008",
+    "email": "rosamee@lamaisonroz.fr",
+    "telephone": "+33687662092",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3 rue Bouvier",
+      "postalCode": "26150",
+      "addressLocality": "Die",
+      "addressRegion": "Drôme",
+      "addressCountry": "FR"
+    },
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "SIRET",
+      "value": "50924901700039"
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    }],
+    "areaServed": {
+      "@type": "Country",
+      "name": "France"
+    },
+    "sameAs": [
+      "https://www.instagram.com/rosameedemauroy",
+      "https://www.facebook.com/rosameedemauroy",
+      "https://www.linkedin.com/in/rosamée-de-mauroy-160a23178"
+    ],
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Fresques murales artistiques",
+          "description": "Décorations murales sur mesure pour espaces de soin, accueil, éducation et intérieurs privés."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Fresques participatives",
+          "description": "Accompagnement de groupes dans la création d'une fresque collective."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ateliers d'arts plastiques",
+          "description": "Ateliers d'exploration plastique et apprentissage de techniques artistiques pour tout public."
+        }
+      }
+    ]
+  }
+  </script>
   <style>
 
 /* ================================================================
@@ -1842,12 +1919,20 @@ img {
       <p>Vous aimez l'univers et les valeurs de La Maison Roz ?<br>Vous souhaitez voir des fresques fleurir sur vos murs, dans vos espaces ?<br>Vous avez assisté à un atelier et souhaitez réitérer ou tenter l'expérience ?<br><br>Nous sommes à votre écoute pour tout projet de fresque murale ou d'atelier artistique.<br>Située à Die (Drôme), Rosamée se déplace de <strong>partout</strong> pour peindre vos murs et vous rencontrer.</p>
 <div class="contact-detail">
         <div class="contact-detail-item">
+          <span class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></span>
+          <span>Atelier — 3 rue Bouvier, 26150 Die</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-icon"><i class="fa-solid fa-clock"></i></span>
+          <span>Lundi à samedi · 9h–17h</span>
+        </div>
+        <div class="contact-detail-item">
           <span class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></span>
           <a href="mailto:rosamee@lamaisonroz.fr">rosamee@lamaisonroz.fr</a>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-icon"><i class="fa-solid fa-phone"></i></span>
-          06 87 66 20 92
+          <a href="tel:+33687662092">06 87 66 20 92</a>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-icon"><i class="fa-brands fa-instagram"></i></span>

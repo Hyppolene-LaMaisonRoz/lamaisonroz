@@ -78,3 +78,6 @@ Disallow: /
 # --- Tous les autres : autorisés ---
 User-agent: *
 Allow: /
+
+# --- Sitemap ---
+Sitemap: https://www.lamaisonroz.fr/sitemap.xml

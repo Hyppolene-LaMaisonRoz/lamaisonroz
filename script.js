@@ -850,3 +850,13 @@ window.addEventListener('load', function() {
   setTimeout(updateHeroSeps, 300);
 });
 if (document.fonts) document.fonts.ready.then(updateHeroSeps);
+
+/* ----------------------------------------------------------------
+   PROTECTION IMAGES (dissuasion clic droit + glisser-déposer)
+---------------------------------------------------------------- */
+document.addEventListener('contextmenu', function(e) {
+  if (e.target.tagName === 'IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', function(e) {
+  if (e.target.tagName === 'IMG') e.preventDefault();
+});

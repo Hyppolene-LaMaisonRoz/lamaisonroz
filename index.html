@@ -428,8 +428,8 @@ button { cursor: pointer; }
 .hero-content {
   position:relative;z-index:2;text-align:center;color:var(--blanc);
   animation:heroIn 1.3s ease both;
-  width:50%;
-  margin-left:50%;
+  width:62%;
+  margin-left:38%;
   display:flex;flex-direction:column;align-items:center;
   padding-right:52px;box-sizing:border-box;
 }
@@ -446,7 +446,20 @@ button { cursor: pointer; }
 .hero-maison { display:block;font-family:var(--serif);font-weight:600;font-size:clamp(16px,2.2vw,26px);letter-spacing:.45em;text-transform:uppercase;color:var(--blanc);margin-bottom:4px; }
 .hero-roz    { display:block;font-family:var(--brush);font-size:clamp(80px,12vw,140px);color:var(--bordeaux);line-height:.85;filter:drop-shadow(0 4px 20px rgba(0,0,0,.28)); }
 .hero-sub    { margin-top:20px;font-family:var(--serif);font-size:19px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);text-align:center;width:100%;text-shadow:0 0 12px rgba(0,0,0,.9); }
-.hero-presentation { margin-top:28px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.9;color:rgba(255,255,255,.92);text-align:center;max-width:700px;width:100%;text-shadow:0 0 12px rgba(0,0,0,.9); }
+.hero-presentation { margin-top:28px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.9;color:rgba(255,255,255,.95);text-align:center;max-width:700px;width:100%;text-shadow:0 0 12px rgba(0,0,0,.9);
+  padding:22px 28px;
+  border-radius:10px;
+  box-sizing:border-box;
+  transition:background .3s, backdrop-filter .3s;
+}
+/* Fond opacifiant uniquement quand le texte risque de passer devant le personnage */
+@media (max-width:1000px) {
+  .hero-presentation {
+    background:rgba(0,0,0,.22);
+    -webkit-backdrop-filter:blur(6px);
+            backdrop-filter:blur(6px);
+  }
+}
 .hero-scroll {
   position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -2001,7 +2014,7 @@ img {
 
 <!-- PARTENAIRES -->
   <section id="partenaires-contact" class="reveal" style="margin-top:60px;">
-    <p class="part-label">Ils nous font confiance</p>
+    <p class="part-label">Où voir les fresques de La Maison Roz ?</p>
     <div class="part-logos">
       <div class="part-logo" title="CH Annecy-Genevois" style="background-image:url('https://res.cloudinary.com/dutonwdor/image/upload/f_auto,q_auto/PARTENAIRE01-CH-annecy.png');"></div>
       <div class="part-logo" title="École Terre d'Enfance, Die, Drôme" style="background-image:url('https://res.cloudinary.com/dutonwdor/image/upload/f_auto,q_auto/PARTENAIRE02-terresdenfances.png');"></div>

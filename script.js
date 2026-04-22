@@ -249,28 +249,63 @@ document.addEventListener('keydown', e => {
 });
 
 /* ----------------------------------------------------------------
+   CONTACT — SOUS-NAV SCROLL
+---------------------------------------------------------------- */
+function scrollToContact(section) {
+  const el = document.getElementById(section);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+  // Mise à jour visuelle du bouton actif
+  document.querySelectorAll('#page-contact .apropos-subnav-btn').forEach(b => {
+    b.classList.remove('active');
+  });
+  const btn = Array.from(document.querySelectorAll('#page-contact .apropos-subnav-btn'))
+    .find(b => b.getAttribute('onclick')?.includes(`'${section}'`));
+  if (btn) btn.classList.add('active');
+}
+
+/* ----------------------------------------------------------------
    PRESTATIONS — SOUS-NAV SCROLL (mobile)
 ---------------------------------------------------------------- */
 function scrollToPrestation(section) {
+  // Si on n'est pas sur la page prestations, on y va avec le hash
+  if (currentPage !== 'ateliers') {
+    location.href = '/prestations.html#presta-' + section;
+    return;
+  }
   const el = document.getElementById('presta-' + section);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (el) {
+    const navH = document.getElementById('navbar')?.offsetHeight || 80;
+    const y = el.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top:y, behavior:'smooth' });
+  }
   document.querySelectorAll('.prestations-subnav-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.presta === section);
   });
+  history.replaceState(null, '', '#presta-' + section);
 }
 
 /* ----------------------------------------------------------------
    À PROPOS — SOUS-NAV SCROLL
 ---------------------------------------------------------------- */
 function scrollToApropos(section) {
-  showPage('apropos');
-  setTimeout(() => {
-    const el = document.getElementById('apropos-' + section);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    document.querySelectorAll('.apropos-subnav-btn').forEach((b, i) => {
-      b.classList.toggle('active', b.textContent.toLowerCase().includes(section.substring(0,4)));
-    });
-  }, 50);
+  // Si on n'est pas sur la page apropos, on y va avec le hash
+  if (currentPage !== 'apropos') {
+    location.href = '/apropos.html#apropos-' + section;
+    return;
+  }
+  const el = document.getElementById('apropos-' + section);
+  if (el) {
+    // Hauteur réelle de la navbar + sous-menu pour offset précis
+    const navH    = document.getElementById('navbar')?.offsetHeight || 80;
+    const subnavH = document.querySelector('.apropos-subnav')?.offsetHeight || 0;
+    const offset  = navH + subnavH;
+    const y = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top:y, behavior:'smooth' });
+  }
+  document.querySelectorAll('.apropos-subnav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.apropos === section);
+  });
+  history.replaceState(null, '', '#apropos-' + section);
 }
 
 /* ----------------------------------------------------------------
@@ -876,21 +911,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const f = params.get('filter');
     if (f) filtrerGalerie(f);
   }
-  // Prestations : init carrousel témoignages + scroll vers hash si #presta-X
+  // Prestations : init carrousel + scroll vers hash et activation bouton
   if (currentPage === 'ateliers') {
     initCarouselAteliers();
-    if (location.hash) {
-      const el = document.querySelector(location.hash);
-      if (el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+    if (location.hash.startsWith('#presta-')) {
+      const section = location.hash.replace('#presta-', '');
+      setTimeout(() => scrollToPrestation(section), 100);
     }
   }
-  // À propos : scroll vers hash si #apropos-X + activer le bouton subnav
-  if (currentPage === 'apropos' && location.hash) {
-    const el = document.querySelector(location.hash);
-    if (el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  // À propos : scroll vers hash et activation bouton
+  if (currentPage === 'apropos' && location.hash.startsWith('#apropos-')) {
     const section = location.hash.replace('#apropos-', '');
-    document.querySelectorAll('.apropos-subnav-btn').forEach(b => {
-      b.classList.toggle('active', b.textContent.toLowerCase().includes(section.substring(0,4)));
-    });
+    setTimeout(() => scrollToApropos(section), 100);
   }
 });

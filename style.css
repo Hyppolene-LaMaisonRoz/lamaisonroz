@@ -706,27 +706,28 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   font-family:var(--serif);font-size:18px;line-height:1.85;
   color:#4a4a4a;margin-top:24px;
 }
-/* Sous-nav prestations (mobile uniquement) */
+/* Sous-nav prestations (même style que la sous-nav à propos) */
 .prestations-subnav{
-  display:none;
+  display:flex;justify-content:center;gap:0;flex-wrap:wrap;
+  border-bottom:2px solid rgba(232,228,222,.6);
+  margin-bottom:0;
+  background:rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(4px);
+          backdrop-filter:blur(4px);
+  position:sticky;top:72px;z-index:100;
 }
 @media (max-width:768px){
-  .prestations-subnav{
-    display:flex;justify-content:center;flex-wrap:wrap;
-    border-bottom:2px solid #e8e4de;
-    background:var(--blanc);
-    position:sticky;top:70px;z-index:100;
-  }
+  .prestations-subnav{top:70px;}
 }
 .prestations-subnav-btn{
-  font-family:var(--serif);font-weight:500;font-size:11px;
-  letter-spacing:.12em;text-transform:uppercase;
-  padding:14px 16px;background:transparent;border:none;
-  color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;
+  font-family:var(--serif);font-weight:500;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:18px 28px;background:transparent;border:none;
+  color:#111;border-bottom:2px solid transparent;margin-bottom:-2px;
   transition:all .3s;cursor:pointer;
 }
-.prestations-subnav-btn:hover{color:var(--bordeaux);}
-.prestations-subnav-btn.active{color:var(--bordeaux);border-bottom-color:var(--bordeaux);}
+.prestations-subnav-btn:hover{color:var(--bleu);}
+.prestations-subnav-btn.active{color:var(--bleu);font-weight:700;border-bottom-color:var(--bleu);}
 
 /* Trois colonnes */
 .ateliers-cols{
@@ -806,24 +807,30 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 /* Sous-nav à propos */
 .apropos-subnav{
   display:flex;justify-content:center;gap:0;flex-wrap:wrap;
-  border-bottom:2px solid #e8e4de;
+  border-bottom:2px solid rgba(232,228,222,.6);
   margin-bottom:0;
-  background:var(--blanc);
-  position:sticky;top:80px;z-index:100;
+  background:rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(4px);
+          backdrop-filter:blur(4px);
+  position:sticky;top:72px;z-index:100;
+}
+@media (max-width:768px){
+  .apropos-subnav{top:70px;}
 }
 .apropos-subnav-btn{
   font-family:var(--serif);font-weight:500;font-size:12px;
   letter-spacing:.14em;text-transform:uppercase;
   padding:18px 28px;background:transparent;border:none;
-  color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;
+  color:#111;border-bottom:2px solid transparent;margin-bottom:-2px;
   transition:all .3s;
 }
-.apropos-subnav-btn:hover{color:var(--bordeaux);}
-.apropos-subnav-btn.active{color:var(--bordeaux);border-bottom-color:var(--bordeaux);}
+.apropos-subnav-btn:hover{color:var(--bleu);}
+.apropos-subnav-btn.active{color:var(--bleu);font-weight:700;border-bottom-color:var(--bleu);}
 
 /* Sections à propos */
 .apropos-section{
   padding:88px 52px;
+  scroll-margin-top:140px;
 }
 .apropos-section:nth-child(even){background:var(--clair);}
 /* Présentation */
@@ -844,9 +851,26 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   .apropos-presentation { grid-template-columns: 1fr !important; gap: 32px !important; }
   .apropos-presentation p { text-align: justify !important; }
   .equipe-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+}
+/* XS : équipe en une seule colonne */
+@media (max-width: 576px) {
+  .equipe-grid { grid-template-columns: 1fr !important; max-width: 360px !important; }
+}
+@media (max-width: 768px) {
   .apropos-section img[style*="float"] {
     float:none !important;width:100% !important;
     margin:0 0 24px 0 !important;display:block;
+  }
+}
+/* XS : images des sections à propos placées APRÈS le texte */
+@media (max-width:576px){
+  .apropos-section > div{
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  .apropos-section img[style*="float"]{
+    order:99 !important;
+    margin:24px 0 0 0 !important;
   }
 }
 .equipe-card{text-align:center;}

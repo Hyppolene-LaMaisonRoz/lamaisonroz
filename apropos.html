@@ -157,11 +157,12 @@
   </div>
 
   <div class="apropos-subnav">
-    <button class="apropos-subnav-btn active" onclick="location.href='/apropos.html#apropos-histoire'">Notre histoire</button>
-    <button class="apropos-subnav-btn" onclick="location.href='/apropos.html#apropos-equipe'">L'équipe</button>
-    <button class="apropos-subnav-btn" onclick="location.href='/apropos.html#apropos-valeurs'">Nos valeurs</button>
-    <button class="apropos-subnav-btn" onclick="location.href='/apropos.html#apropos-demarche'">La démarche</button>
-    <button class="apropos-subnav-btn" onclick="location.href='/apropos.html#apropos-soutenir'">Soutenir La Maison Roz</button>
+    <button class="apropos-subnav-btn" data-apropos="histoire" onclick="scrollToApropos('histoire')">Notre histoire</button>
+    <button class="apropos-subnav-btn" data-apropos="equipe" onclick="scrollToApropos('equipe')">L'équipe</button>
+    <button class="apropos-subnav-btn" data-apropos="valeurs" onclick="scrollToApropos('valeurs')">Nos valeurs</button>
+    <button class="apropos-subnav-btn" data-apropos="demarche" onclick="scrollToApropos('demarche')">La démarche</button>
+    <button class="apropos-subnav-btn" data-apropos="fresques-suspendues" onclick="scrollToApropos('fresques-suspendues')">Fresques suspendues</button>
+    <button class="apropos-subnav-btn" data-apropos="soutenir" onclick="scrollToApropos('soutenir')">Soutenir La Maison Roz</button>
   </div>
 
   <!-- Notre histoire -->
@@ -264,6 +265,61 @@
       </p>
     </div>
       <div style="clear:both;"></div>
+    </div>
+  </div>
+
+  <!-- Fresques suspendues -->
+  <div class="apropos-section" id="apropos-fresques-suspendues">
+    <div style="max-width:1200px;margin:0 auto;padding:0;">
+      <span class="section-label">Projet solidaire</span>
+      <h2 class="section-brush">Fresques suspendues</h2>
+      <p style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--bordeaux);margin-top:8px;margin-bottom:28px;">Un projet porté par La Maison Roz</p>
+
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:20px;">
+        Il existe des lieux où l'on vit d'une autre façon — où l'on grandit, où l'on vieillit, où l'on guérit, où l'on est accompagné. Les crèches et pouponnières, les foyers de l'enfance, les maisons d'enfants à caractère social, les instituts médico-éducatifs, les maisons d'accueil spécialisées, les foyers de vie, les EHPAD, les unités de soins de longue durée… Ces lieux accueillent des êtres humains à chaque extrémité de la vie, et à chaque étape de la vulnérabilité.
+      </p>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:20px;">
+        Dans ces espaces particulièrement, les murs ont un pouvoir. Ils peuvent peser, ou ils peuvent raconter. Ils peuvent enfermer, ou ils peuvent ouvrir des horizons imaginaires à ceux qui ne peuvent pas toujours aller les chercher ailleurs.
+      </p>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:20px;">
+        C'est de cette idée qu'est né le projet des <strong>Fresques suspendues</strong>.
+      </p>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:20px;">
+        À l'image des cafés suspendus — où l'on paie un café pour quelqu'un qui n'a pas les moyens de se l'offrir — les Fresques suspendues permettent à des particuliers, des entreprises ou des collectifs de financer une fresque murale dans un établissement qui en rêve mais ne peut pas se le permettre.
+      </p>
+
+      <h3 style="font-family:var(--brush);font-size:34px;color:var(--bleu);margin-top:48px;margin-bottom:10px;">Vous êtes une équipe soignante, éducative ou médico-sociale&nbsp;?</h3>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;">
+        Vous animez un lieu de vie et vous sentez que vos murs pourraient raconter une autre histoire&nbsp;? Que vos résidents, vos enfants, vos patients mériteraient un espace plus humain, plus coloré, plus vivant&nbsp;?
+      </p>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:16px;">
+        Signalez-vous. La Maison Roz viendra vous écouter, comprendre votre lieu, vos équipes, ceux que vous accueillez — et construire avec vous un projet de fresque sur mesure, participatif si vous le souhaitez.
+      </p>
+
+      <h3 style="font-family:var(--brush);font-size:34px;color:var(--bleu);margin-top:40px;margin-bottom:10px;">Vous souhaitez contribuer&nbsp;?</h3>
+      <p style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;">
+        Vous voulez que votre générosité atterrisse quelque part de concret et de beau&nbsp;? Les Fresques suspendues vous permettent de financer tout ou partie d'une fresque dans un établissement identifié — ou d'abonder un fonds commun qui sera mobilisé dès qu'un projet est prêt à naître.
+      </p>
+      <p style="font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.85;color:var(--bordeaux);margin-top:16px;">
+        Chaque contribution, quelle que soit sa taille, devient une couleur sur un mur qui attendait.
+      </p>
+
+      <h3 style="font-family:var(--brush);font-size:34px;color:var(--bleu);margin-top:40px;margin-bottom:16px;">Comment ça fonctionne&nbsp;?</h3>
+      <ol style="font-family:var(--serif);font-size:17px;line-height:1.85;color:#4a4a4a;padding-left:24px;">
+        <li>Les équipes d'établissements se signalent à La Maison Roz.</li>
+        <li>Rosamée évalue le projet, rencontre les équipes, conçoit une proposition.</li>
+        <li>Le projet est présenté aux financeurs potentiels.</li>
+        <li>Une fois financé, la fresque est réalisée — seule ou en atelier participatif avec les résidents et les équipes.</li>
+        <li>Les contributeurs reçoivent une trace du projet&nbsp;: photos, récit, remerciements.</li>
+      </ol>
+
+      <p style="font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.85;color:#4a4a4a;margin-top:32px;text-align:center;">
+        La Maison Roz assure le lien entre ceux qui ont l'envie et ceux qui ont les murs.
+      </p>
+
+      <div style="text-align:center;margin-top:32px;">
+        <button class="btn-solid" onclick="location.href='/contact.html#formulaire'">Rejoindre le projet</button>
+      </div>
     </div>
   </div>
 

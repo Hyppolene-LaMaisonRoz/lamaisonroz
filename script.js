@@ -919,9 +919,12 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => scrollToPrestation(section), 100);
     }
   }
-  // À propos : scroll vers hash et activation bouton
+  // À propos : scroll vers hash et activation bouton (on attend les polices + images)
   if (currentPage === 'apropos' && location.hash.startsWith('#apropos-')) {
     const section = location.hash.replace('#apropos-', '');
-    setTimeout(() => scrollToApropos(section), 100);
+    const doScroll = () => scrollToApropos(section);
+    // Au chargement complet (images comprises), refaire le scroll précisément
+    window.addEventListener('load', () => setTimeout(doScroll, 50));
+    setTimeout(doScroll, 300);
   }
 });

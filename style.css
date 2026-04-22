@@ -289,6 +289,32 @@ button { cursor: pointer; }
   .lo-form-wrap { padding: 32px 20px !important; }
 }
 
+/* XS : réduire de moitié l'espace titre/navbar sur galerie, prestations, apropos */
+@media (max-width:576px){
+  .galerie-hero  { padding-top: 50px !important; }
+  .ateliers-hero { padding-top: 50px !important; }
+  .apropos-hero  { padding-top: 50px !important; }
+}
+/* Livre d'or XS : boutons flèches en dessous des cartes */
+@media (max-width:576px){
+  #lo-slides{overflow:hidden;height:480px !important;}
+  #livreor .carousel-btn.prev,
+  #livreor .carousel-btn.next{
+    position:static !important;
+    transform:none !important;
+    top:auto !important;left:auto !important;right:auto !important;
+    display:inline-flex;
+    margin:16px 6px 0;
+    width:44px;height:44px;
+  }
+  /* Le wrapper direct de lo-slides reçoit text-align pour centrer les boutons inline */
+  #livreor > div:has(> #lo-slides){
+    overflow:visible !important;
+    text-align:center;
+    margin-bottom:20px !important;
+  }
+}
+
 
 /* ================================================================
    PAGE ACCUEIL
@@ -361,7 +387,8 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
   max-width:1200px;margin-left:auto;margin-right:auto;
 }
 .portfolio-header-top {
-  display:flex;justify-content:space-between;align-items:flex-end;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
 }
 .portfolio-voir {
   font-family:var(--serif);font-size:14px;color:var(--bleu);
@@ -753,6 +780,21 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 .ateliers-temo{
   padding:80px 52px;background:var(--bleu);
 }
+/* XS (< 576px) : boutons flèches sous le texte + section s'adapte au contenu */
+@media (max-width:576px){
+  .ateliers-temo{padding:48px 16px;}
+  .ateliers-temo .temo-slide{padding:32px 20px;gap:16px;}
+  .ateliers-temo .temo-quote{font-size:15px;line-height:1.8;margin-bottom:20px;}
+  .ateliers-temo .carousel-btn{
+    position:static !important;
+    transform:none !important;
+    left:auto !important;right:auto !important;
+    display:inline-flex;
+    margin:12px 6px 0;
+    width:44px;height:44px;
+  }
+  .ateliers-temo .temo-carousel{text-align:center;}
+}
 
 /* ================================================================
    PAGE À PROPOS
@@ -861,6 +903,30 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 }
 .contact-form-wrap{padding:80px 60px;background:var(--blanc);}
 .contact-form-title{font-family:var(--brush);font-size:38px;color:var(--bleu);margin-bottom:36px;}
+@media (max-width:768px){
+  .contact-wrap{grid-template-columns:1fr !important;}
+  .contact-info{padding:48px 24px !important;}
+  .contact-form-wrap{padding:48px 24px !important;}
+}
+
+/* PRÉSENTATION MOBILE/TABLETTE (visible uniquement < 992px) */
+#presentation-mobile{display:none;}
+@media (max-width:991px){
+  .hero-presentation{display:none !important;}
+  #presentation-mobile{
+    display:block;
+    padding:36px 24px 56px;
+    background:var(--blanc);
+    max-width:780px;margin:0 auto;
+    text-align:justify;
+  }
+  #presentation-mobile p{
+    font-family:var(--serif);font-style:italic;
+    font-size:17px;line-height:1.85;color:#4a4a4a;
+    margin-bottom:18px;
+  }
+  #presentation-mobile p:last-child{margin-bottom:0;}
+}
 
 /* ================================================================
    PAGE ADMIN
@@ -1103,8 +1169,13 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
-/* Garder la sélection sur les champs de saisie */
-input, textarea {
+/* Garder la sélection sur les champs de saisie et les infos de contact */
+input, textarea,
+.contact-detail-item,
+a[href^="mailto:"],
+a[href^="tel:"],
+.rgpd-wrap p,
+.rgpd-wrap a {
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;

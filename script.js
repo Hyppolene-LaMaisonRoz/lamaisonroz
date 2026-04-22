@@ -695,7 +695,34 @@ function moveLo(dir) { goToLo(curLo + dir); }
 
 window.addEventListener('resize', updateLoCards);
 setTimeout(updateLoCards, 100);
-setInterval(() => moveLo(1), 12000);
+
+/* Auto-rotation uniquement en desktop (>= 992px) */
+let loInterval = null;
+function setupLoAutoRotation() {
+  const isMobile = window.innerWidth < 992;
+  if (isMobile && loInterval) {
+    clearInterval(loInterval); loInterval = null;
+  } else if (!isMobile && !loInterval) {
+    loInterval = setInterval(() => moveLo(1), 12000);
+  }
+}
+setupLoAutoRotation();
+window.addEventListener('resize', setupLoAutoRotation);
+
+/* Swipe tactile pour changer de carte sur mobile */
+if (loSlides) {
+  let touchStartX = 0, touchEndX = 0;
+  loSlides.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, {passive:true});
+  loSlides.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      moveLo(diff < 0 ? 1 : -1);
+    }
+  }, {passive:true});
+}
 
 /* ----------------------------------------------------------------
    Livre d'or

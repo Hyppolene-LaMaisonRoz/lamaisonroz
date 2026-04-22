@@ -1,80 +1,58 @@
 /* ----------------------------------------------------------------
-   NAVIGATION ENTRE PAGES
+   DÉTECTION DE LA PAGE COURANTE (multipage)
 ---------------------------------------------------------------- */
-const PAGES_WITH_HERO = ['accueil'];
-const FOOTER_HIDDEN_ON = ['admin'];
-
-function showPage(name) {
-  // Masquer toutes les pages
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  // Afficher la bonne
-  const target = document.getElementById('page-' + name);
-  if (target) target.classList.add('active');
-  // Scroll haut
-  window.scrollTo(0, 0);
-  // Navbar
-  updateNavbar(name);
-  // Footer
-  const footer    = document.getElementById('footer');
-  const footerBot = document.getElementById('footer-bottom');
-  if (FOOTER_HIDDEN_ON.includes(name)) {
-    footer.style.display    = 'none';
-    footerBot.style.display = 'none';
-  } else {
-    footer.style.display    = 'grid';
-    footerBot.style.display = 'flex';
-  }
-  // Init carrousels si besoin
-  if (name === 'ateliers') initCarouselAteliers();
-  // Réinitialiser reveal
-  initReveal();
-}
-
-function updateNavbar(page) {
-  const nb = document.getElementById('navbar');
-  if (PAGES_WITH_HERO.includes(page)) {
-    nb.classList.remove('solid');
-    document.getElementById('nav-accueil-btn').style.display = 'none';
-  } else {
-    nb.classList.add('solid');
-    nb.classList.remove('scrolled');
-    document.getElementById('nav-accueil-btn').style.display = 'list-item';
-  }
-}
+const PAGE_IDS = ['accueil', 'galerie', 'ateliers', 'apropos', 'contact', 'admin'];
+const currentPage = PAGE_IDS.find(id => document.getElementById('page-' + id));
 
 /* ----------------------------------------------------------------
-   SCROLL → NAVBAR
+   NAVBAR (transparente sur accueil, solide ailleurs)
 ---------------------------------------------------------------- */
+(function setupNavbar() {
+  const nb = document.getElementById('navbar');
+  if (!nb) return;
+  if (currentPage !== 'accueil') {
+    nb.classList.add('solid');
+  }
+})();
+
 window.addEventListener('scroll', () => {
   const nb = document.getElementById('navbar');
-  const activePage = document.querySelector('.page.active');
-  if (activePage && activePage.id === 'page-accueil') {
-    nb.classList.toggle('scrolled', window.scrollY > 80);
-  }
+  if (!nb || currentPage !== 'accueil') return;
+  nb.classList.toggle('scrolled', window.scrollY > 80);
 });
 
+/* Fallback pour d'éventuels onclick="showPage('X')" restants */
+function showPage(name) {
+  const map = { accueil:'/', galerie:'/galerie.html', ateliers:'/prestations.html',
+                apropos:'/apropos.html', contact:'/contact.html', admin:'/admin.html' };
+  location.href = map[name] || '/';
+}
+
 /* ----------------------------------------------------------------
-   CARROUSEL ACCUEIL
+   CARROUSEL ACCUEIL (initialisé seulement si présent)
 ---------------------------------------------------------------- */
 let curSlide = 0;
-const slidesEl  = document.getElementById('temo-slides');
-const dotsWrap  = document.getElementById('carousel-dots');
-const nSlides   = document.querySelectorAll('#temo-slides .temo-slide').length;
-
-for (let i = 0; i < nSlides; i++) {
-  const d = document.createElement('div');
-  d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-  d.addEventListener('click', () => goToSlide(i));
-  dotsWrap.appendChild(d);
+let nSlides  = 0;
+const slidesEl = document.getElementById('temo-slides');
+const dotsWrap = document.getElementById('carousel-dots');
+if (slidesEl && dotsWrap) {
+  nSlides = document.querySelectorAll('#temo-slides .temo-slide').length;
+  for (let i = 0; i < nSlides; i++) {
+    const d = document.createElement('div');
+    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goToSlide(i));
+    dotsWrap.appendChild(d);
+  }
+  setInterval(() => moveCarousel(1), 6000);
 }
 function goToSlide(n) {
+  if (!slidesEl || !nSlides) return;
   curSlide = (n + nSlides) % nSlides;
   slidesEl.style.transform = `translateX(-${curSlide * 100}%)`;
   document.querySelectorAll('#carousel-dots .carousel-dot')
     .forEach((d, i) => d.classList.toggle('active', i === curSlide));
 }
 function moveCarousel(dir) { goToSlide(curSlide + dir); }
-setInterval(() => moveCarousel(1), 6000);
 
 /* ----------------------------------------------------------------
    CARROUSEL ATELIERS
@@ -859,4 +837,33 @@ document.addEventListener('contextmenu', function(e) {
 });
 document.addEventListener('dragstart', function(e) {
   if (e.target.tagName === 'IMG') e.preventDefault();
+});
+
+/* ----------------------------------------------------------------
+   INITIALISATIONS PAR PAGE (multipage)
+---------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', function() {
+  // Galerie : filtre depuis ?filter=X dans l'URL
+  if (currentPage === 'galerie') {
+    const params = new URLSearchParams(location.search);
+    const f = params.get('filter');
+    if (f) filtrerGalerie(f);
+  }
+  // Prestations : init carrousel témoignages + scroll vers hash si #presta-X
+  if (currentPage === 'ateliers') {
+    initCarouselAteliers();
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+    }
+  }
+  // À propos : scroll vers hash si #apropos-X + activer le bouton subnav
+  if (currentPage === 'apropos' && location.hash) {
+    const el = document.querySelector(location.hash);
+    if (el) setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+    const section = location.hash.replace('#apropos-', '');
+    document.querySelectorAll('.apropos-subnav-btn').forEach(b => {
+      b.classList.toggle('active', b.textContent.toLowerCase().includes(section.substring(0,4)));
+    });
+  }
 });

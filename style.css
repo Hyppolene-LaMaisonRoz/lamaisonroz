@@ -729,9 +729,9 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 .prestations-subnav-btn:hover{color:var(--bleu);}
 .prestations-subnav-btn.active{color:var(--bleu);font-weight:700;border-bottom-color:var(--bleu);}
 
-/* Trois colonnes */
+/* Deux colonnes */
 .ateliers-cols{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
+  display:grid;grid-template-columns:1fr 1fr;
   gap:0;
 }
 .ateliers-col{

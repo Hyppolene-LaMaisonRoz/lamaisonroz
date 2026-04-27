@@ -763,10 +763,12 @@ if (loSlides) {
    Livre d'or
 ---------------------------------------------------------------- */
 async function submitLivreOr() {
-  const nom   = document.getElementById('lo-nom').value.trim();
-  const ville = document.getElementById('lo-ville').value.trim();
-  const msg   = document.getElementById('lo-msg').value.trim();
+  const nom     = document.getElementById('lo-nom').value.trim();
+  const ville   = document.getElementById('lo-ville').value.trim();
+  const msg     = document.getElementById('lo-msg').value.trim();
+  const consent = document.getElementById('lo-consent')?.checked;
   if (!nom || !msg) { alert('Merci de renseigner votre nom et votre message.'); return; }
+  if (!consent) { alert("Merci de cocher la case d'autorisation pour envoyer votre message."); return; }
   try {
     const res = await fetch('https://formspree.io/f/xbdpzkww', {
       method: 'POST',
@@ -790,10 +792,12 @@ async function submitLivreOr() {
    CONTACT
 ---------------------------------------------------------------- */
 async function submitContact() {
-  const nom   = document.getElementById('ct-nom').value.trim();
-  const email = document.getElementById('ct-email').value.trim();
-  const msg   = document.getElementById('ct-msg').value.trim();
+  const nom     = document.getElementById('ct-nom').value.trim();
+  const email   = document.getElementById('ct-email').value.trim();
+  const msg     = document.getElementById('ct-msg').value.trim();
+  const consent = document.getElementById('ct-consent')?.checked;
   if (!nom || !msg) { alert('Merci de renseigner votre nom et votre message.'); return; }
+  if (!consent) { alert("Merci de cocher la case d'autorisation pour envoyer votre message."); return; }
   try {
     const res = await fetch('https://formspree.io/f/xaqlbqrk', {
       method: 'POST',
@@ -919,12 +923,16 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => scrollToPrestation(section), 100);
     }
   }
-  // À propos : scroll vers hash et activation bouton (on attend les polices + images)
+  // À propos : scroll vers hash et activation bouton (multiple essais pour gérer images/polices)
   if (currentPage === 'apropos' && location.hash.startsWith('#apropos-')) {
     const section = location.hash.replace('#apropos-', '');
     const doScroll = () => scrollToApropos(section);
-    // Au chargement complet (images comprises), refaire le scroll précisément
-    window.addEventListener('load', () => setTimeout(doScroll, 50));
-    setTimeout(doScroll, 300);
+    // Désactiver le scroll natif du navigateur en effaçant le hash temporairement
+    history.replaceState(null, '', location.pathname);
+    window.scrollTo(0, 0);
+    // Plusieurs tentatives : 100ms, 400ms, après load complet
+    setTimeout(doScroll, 100);
+    setTimeout(doScroll, 400);
+    window.addEventListener('load', () => setTimeout(doScroll, 100));
   }
 });

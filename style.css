@@ -1213,3 +1213,16 @@ img {
 .nav-logo     { --lmr-color-a: var(--bleu);  --lmr-color-b: var(--bordeaux); }
 .hero-content { --lmr-color-a: var(--blanc); --lmr-color-b: var(--blanc); }
 
+/* Texte visible uniquement par les moteurs de recherche et lecteurs d'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+

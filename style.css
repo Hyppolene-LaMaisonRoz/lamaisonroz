@@ -893,7 +893,7 @@ src: url('https://raw.githubusercontent.com/Hyppolene-LaMaisonRoz/lamaisonroz/ma
 .contact-hero{
   position:relative;
   min-height:380px;
-  background-image:url('https://res.cloudinary.com/dutonwdor/image/upload/f_auto,q_auto/v1775729250/chantier.jpg');
+  background-image:url('https://res.cloudinary.com/dutonwdor/image/upload/f_auto,q_auto,w_1600,c_limit/v1775729250/chantier.jpg');
   background-size:cover;background-position:center;
   display:flex;align-items:center;justify-content:center;text-align:center;
 }

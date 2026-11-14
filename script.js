@@ -227,7 +227,7 @@ function renderLightbox() {
   img.className = '';
   img.style.cssText = 'width:100%;height:100%;object-fit:contain;';
   if (srcImg) img.style.backgroundImage = 'none';
-  img.innerHTML = srcImg ? `<img src="${srcImg.src}" style="max-width:100%;max-height:80vh;object-fit:contain;" />` : '';
+  img.innerHTML = srcImg ? `<img src="${srcImg.src.replace('w_800,c_limit', 'w_1800,c_limit')}" style="max-width:100%;max-height:80vh;object-fit:contain;" />` : '';
   document.getElementById('lb-caption').textContent = lbCaptions[origIdx] || '';
 }
 function moveLightbox(dir) {

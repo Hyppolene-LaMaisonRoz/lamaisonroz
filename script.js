@@ -225,9 +225,14 @@ function renderLightbox() {
   const img     = document.getElementById('lb-img');
   const srcImg  = item.querySelector('img');
   img.className = '';
-  img.style.cssText = 'width:100%;height:100%;object-fit:contain;';
-  if (srcImg) img.style.backgroundImage = 'none';
-  img.innerHTML = srcImg ? `<img src="${srcImg.src.replace('w_800,c_limit', 'w_1800,c_limit')}" style="max-width:100%;max-height:80vh;object-fit:contain;" />` : '';
+  img.innerHTML = '';
+  if (srcImg) {
+    const big = new Image();
+    big.alt = srcImg.alt;
+    big.onload = big.onerror = () => { if (img.contains(big)) img.classList.add('loaded'); };
+    big.src = srcImg.src.replace('w_800,c_limit', 'w_1800,c_limit');
+    img.appendChild(big);
+  }
   document.getElementById('lb-caption').textContent = lbCaptions[origIdx] || '';
 }
 function moveLightbox(dir) {
